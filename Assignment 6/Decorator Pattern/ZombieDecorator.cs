@@ -11,7 +11,7 @@ namespace _487Assignment4.Decorator_Pattern
     {
         public abstract string ZombieType { get; set; }
 
-        public abstract int GetTotalHealth {  get; set; }
+        public abstract int GetTotalHealth {  get;  }
         public abstract bool isMetal { get; set; }
 
         public abstract int AccessoryHealth { get; set; }

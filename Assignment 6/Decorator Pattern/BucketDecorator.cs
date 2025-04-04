@@ -10,19 +10,20 @@ namespace _487Assignment4.Decorator_Pattern
     public class BucketDecorator : ZombieDecorator
     {
 
-        public override string ZombieType { get; set; }
+        public override string ZombieType { get; set; } = "Bucket Zombie";
 
         public override int AccessoryHealth { get; set; } = 100;
 
-        public override int GetTotalHealth { get; set; }
         public override bool isMetal { get; set; }
 
         public IZombieComponent accessory { get; set; }
 
+
+        public override int GetTotalHealth => this.zombie.GetTotalHealth + this.AccessoryHealth; 
+
         public BucketDecorator(IZombieComponent zombieAccessory) : base(zombieAccessory)
         {
-            this.ZombieType = $"Bucket {zombieAccessory.ZombieType}";
-            this.GetTotalHealth = zombieAccessory.GetTotalHealth + this.AccessoryHealth;
+            //this.GetTotalHealth = zombieAccessory.GetTotalHealth + this.AccessoryHealth;
             this.isMetal = true;
         }
 
@@ -47,7 +48,14 @@ namespace _487Assignment4.Decorator_Pattern
 
         public override void RepresentZombie()
         {
-            Console.Write($"{this.ZombieType} / {this.GetTotalHealth}, ");
+            if (this.AccessoryHealth > 0 && this.isMetal)
+            {
+                Console.Write($"{this.ZombieType} / {this.GetTotalHealth}, ");
+            }
+            else
+            {
+                this.zombie.RepresentZombie();
+            }
         }
 
         public override void TakeDamage(int damage)

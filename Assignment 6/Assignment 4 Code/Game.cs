@@ -42,6 +42,45 @@ namespace Assignment4_487
             }
         }
 
+        public void TestDecorator()
+        {
+            var factory = new ZombieFactory();
+            List<IZombieComponent> zombies = new List<IZombieComponent>();
+
+            IZombieComponent zombie1 = factory.CreateZombie("RegularZombie");
+            IZombieComponent zombie2 = factory.CreateZombie("ConeZombie");
+            IZombieComponent zombie3 = factory.CreateZombie("BucketZombie");
+            IZombieComponent zombie4 = factory.CreateZombie("ScreenZombie");
+
+            //zombies.Add(zombie1);
+            //zombies.Add(zombie2);
+            zombies.Add(zombie3);
+            zombies.Add(zombie4);
+            int test = 5;
+
+            int count = 0;
+
+            while (zombies.Count > 0)
+            {
+                //Console.WriteLine("=== No Damage Applied ===");
+                //this.PrintZombies(zombies);
+                // Console.WriteLine("=== Took Damage ===");
+                //this.PrintZombies(zombies);
+                //Console.WriteLine("==Above is Before the magnent and damage==");
+                //zombies[0].MagnetForce();
+
+                //zombies[0].TakeDamage(35);
+                
+                //this.PrintZombies(zombies);
+                //Console.WriteLine("==Damage has been taken==");
+                this.RemoveZombie(zombies);
+                this.PrintZombies(zombies);
+                //Console.WriteLine("==Magnet has been removed==");
+                count++;
+
+            }
+        }
+
         public void GamePlay()
         {
             bool input = true;
