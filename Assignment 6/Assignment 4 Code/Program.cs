@@ -12,7 +12,7 @@ namespace Assignment4_487
         {
             Game game = new Game();
 
-            game.TestDecorator();
+            game.GamePlay();
         }
     }
 }

@@ -59,7 +59,7 @@ namespace Assignment4_487
             int test = 5;
 
             int count = 0;
-
+            this.PrintZombies(zombies);
             while (zombies.Count > 0)
             {
                 //Console.WriteLine("=== No Damage Applied ===");
@@ -70,7 +70,7 @@ namespace Assignment4_487
                 //zombies[0].MagnetForce();
 
                 //zombies[0].TakeDamage(35);
-                
+                zombies[0].FromAboveDamage(25);
                 //this.PrintZombies(zombies);
                 //Console.WriteLine("==Damage has been taken==");
                 this.RemoveZombie(zombies);
@@ -108,10 +108,7 @@ namespace Assignment4_487
 
         public void MainGame(List<IZombieComponent> zombies)
         {
-            Console.WriteLine($"Enter in a Damage value, Default is 25");
-            string? damageNumber = Console.ReadLine();
-
-            int damage = int.Parse(damageNumber);
+            
             int roundCount = 0;
             Console.Write($"Round {roundCount}: ");
             this.PrintZombies(zombies);
@@ -121,7 +118,7 @@ namespace Assignment4_487
                // Console.WriteLine("=== No Damage Applied ===");
                // this.PrintZombies(zombies);
                // Console.WriteLine("=== Took Damage ===");
-                zombies[0].TakeDamage(damage);
+                this.ChoosePlant(zombies);
                 this.RemoveZombie(zombies);
                 Console.Write($"Round {roundCount}: ");
                 this.PrintZombies(zombies);
@@ -163,6 +160,37 @@ namespace Assignment4_487
             Console.WriteLine("All Created Zombies: ");
             this.PrintZombies(zombies);
 
+        }
+
+        public void ChoosePlant(List<IZombieComponent> zombies)
+        {
+            // Here we choose the plant that will affect the 
+            Console.WriteLine("What Type of Plant do you want to attack with: ");
+            Console.WriteLine(" 1. Peashooter\n 2. Watermelon\n 3. Magnet-Shroom\n");
+            var plantType = Console.ReadLine();
+            switch(plantType)
+            {
+                case "1":
+                    //Console.WriteLine($"Enter in a Damage value, Default is 25");
+                    //string? damageNumber = Console.ReadLine();
+
+                    //int damage = int.Parse(damageNumber);
+                    zombies[0].TakeDamage(25);
+                    break;
+                case "2":
+                    //Console.WriteLine($"Enter in a Damage value, Default is 40");
+                    //string? damageNumber1 = Console.ReadLine();
+
+                    //int damage1 = int.Parse(damageNumber1);
+                    zombies[0].TakeDamage(40);
+                    break;
+                case "3":
+                    zombies[0].MagnetForce();
+                    break;
+                default:
+                    Console.WriteLine("Invalid Type skipping round....");
+                    break;
+            }
         }
 
         public void PrintZombies(List<IZombieComponent> zombies)

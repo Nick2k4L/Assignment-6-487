@@ -47,7 +47,7 @@ namespace _487Assignment4.Decorator_Pattern
 
         public override void RepresentZombie()
         {
-            if (this.AccessoryHealth > 0 && this.isMetal)
+            if (this.AccessoryHealth > 0 && this.isMetal && !this.isFromAbove)
             {
                 Console.Write($"{this.ZombieType} / {this.GetTotalHealth}, ");
             }
