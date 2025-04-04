@@ -18,6 +18,7 @@ namespace Assignment4_487.CompositePattern
             }
         }
 
+        public bool isMetal { get; set; } = false;
 
         public bool Die()
         {
@@ -26,6 +27,11 @@ namespace Assignment4_487.CompositePattern
                 return true;
             }
             return false;
+        }
+
+        public bool GetMetalStatus()
+        {
+            return this.isMetal;
         }
 
         public void RepresentZombie()

@@ -23,11 +23,11 @@ namespace Assignment4_487
                 case "RegularZombie":
                     return new Zombie("Regular Zombie");
                 case "ConeZombie":
-                    return new ZombieWithAccessory("Cone Zombie", new Zombie("Regular Zombie"), new Cone());
+                    return new
                 case "ScreenZombie":
-                    return new ZombieWithAccessory("Screen Zombie", new Zombie("Regular Zombie"), new Screen());
+                    return new 
                 case "BucketZombie":
-                    return new ZombieWithAccessory("Bucket Zombie", new Zombie("Regular Zombie"), new Bucket());
+                    return new 
                 default:
                     throw new NotImplementedException("No Zombie of this type");
             }

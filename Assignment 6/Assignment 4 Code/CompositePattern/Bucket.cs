@@ -18,14 +18,20 @@ namespace Assignment4_487
             }
         }
 
+        public bool isMetal { get; set; } = true;
 
         public bool Die()
         {
-            if (this.Health <= 0)
+            if (this.Health <= 0 && this.isMetal)
             {
                 return true;
             }
             return false;
+        }
+
+        public bool GetMetalStatus()
+        {
+            return this.isMetal;
         }
 
         public void RepresentZombie()

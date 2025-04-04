@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Assignment4_487
 {
-    public class Zombie: IZombieComponent
+    public class Zombie : IZombieComponent
     {
-        public string ZombieType { get; set; } // What type of accessory will the Zombie Have
+        public string ZombieType { get; } = "Regular"; // What type of accessory will the Zombie Have
         public int Health { get; set; } = 50; // Zombies Health
 
         //public bool HasAccessory { get; set; } // Whether the zombie has an accessory or not
@@ -26,20 +26,37 @@ namespace Assignment4_487
 
         public bool IsAlive { get; set; }
 
-
+        public bool isMetal { get; set; } = false;
 
         // Constructor for the zombie.
-        public Zombie(string type)
+        // Now we pass in a decorator instead of a type im pretty sure
+        public Zombie()
         {
-            this.ZombieType = type;
+            //this.ZombieType = type;
             this.IsAlive = true; // Zombie is created, so "Alive"
+        }
+
+        public virtual bool GetMetalStatus()
+        {
+            return this.isMetal;
+        }
+
+        public virtual void MagnetForce()
+        {
+          
+        }
+
+        public virtual void FromAboveDamage(int damage)
+        {
+            this.Health -= damage;
+            this.Die();
         }
 
         public virtual void TakeDamage(int damage) // Taking Damage
         {
             //Console.WriteLine("///Normal Damage");
             this.Health -= damage;
-            this.Die();  
+            this.Die();
         }
 
         public virtual bool Die() // Set to false once the zombies health goes below zero

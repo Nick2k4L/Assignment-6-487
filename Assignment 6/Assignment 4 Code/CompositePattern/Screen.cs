@@ -10,12 +10,19 @@ namespace Assignment4_487
     {
         public int Health { get; set; } = 25;
 
+        public bool isMetal { get; set; } = true;
+
         public int GetTotalHealth
         {
             get
             {
                 return this.Health;
             }
+        }
+
+        public bool GetMetalStatus()
+        {
+            return this.isMetal;
         }
 
 
