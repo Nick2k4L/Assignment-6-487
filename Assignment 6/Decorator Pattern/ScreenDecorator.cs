@@ -19,6 +19,7 @@ namespace _487Assignment4.Decorator_Pattern
         public override int GetTotalHealth => this.zombie.GetTotalHealth + this.AccessoryHealth;
 
         public override bool isMetal { get; set; }
+        public override bool IsAlive { get; set; }
 
         public ScreenDecorator(IZombieComponent zombie) : base(zombie)
         {

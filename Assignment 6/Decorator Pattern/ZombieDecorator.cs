@@ -1,4 +1,5 @@
-﻿using Assignment4_487;
+﻿using _487Assignment4.Observer_Pattern;
+using Assignment4_487;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,18 @@ namespace _487Assignment4.Decorator_Pattern
         public abstract int GetTotalHealth {  get;  }
         public abstract bool isMetal { get; set; }
 
+        public abstract bool IsAlive { get; set; }
+
         public abstract int AccessoryHealth { get; set; }
+
+        public IZombieComponent Parent { get; set; }
 
         public IZombieComponent? zombie;
 
         public ZombieDecorator(IZombieComponent zombie)
         {
             this.zombie = zombie;
+            this.zombie.Parent = this;
         }
 
         public abstract bool Die();
@@ -34,5 +40,20 @@ namespace _487Assignment4.Decorator_Pattern
         public abstract void TakeDamage(int damage);
 
         public abstract bool GetMetalStatus();
+
+        public void Attach(IObserver observer)
+        {
+            this.zombie?.Attach(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            this.zombie?.Detach(observer);
+        }
+
+        public void Notify()
+        {
+            this.zombie?.Notify();
+        }
     }
 }

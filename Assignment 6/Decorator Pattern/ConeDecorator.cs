@@ -15,6 +15,8 @@ namespace _487Assignment4.Decorator_Pattern
         public override bool isMetal { get; set; }
         public override int AccessoryHealth { get; set; } = 25;
 
+        public override bool IsAlive { get; set; }
+
         public ConeDecorator(IZombieComponent zombie) : base(zombie)
         {
             //this.GetTotalHealth = zombie.GetTotalHealth + this.AccessoryHealth;

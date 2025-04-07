@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _487Assignment4.Observer_Pattern;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,10 @@ namespace Assignment4_487
         public bool IsAlive { get; set; }
 
         public bool isMetal { get; set; } = false;
+
+        private List<IObserver> observers = new List<IObserver>();
+
+        public IZombieComponent Parent { get; set; } = null;
 
         // Constructor for the zombie.
         // Now we pass in a decorator instead of a type im pretty sure
@@ -63,6 +68,8 @@ namespace Assignment4_487
         {
             if (this.Health <= 0)
             {
+                this.IsAlive = false;
+                this.Notify();
                 return true;
             }
 
@@ -72,6 +79,36 @@ namespace Assignment4_487
         public virtual void RepresentZombie()
         {
             Console.Write($"{this.ZombieType} / {this.GetTotalHealth}, ");
+        }
+
+        public void Attach(IObserver observer)
+        {
+            this.observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            this.observers.Remove(observer);
+        }
+
+        public void Notify()
+        {
+            IZombieComponent subject;
+
+            if (this.Parent != null)
+            {
+                subject = this.Parent;
+            }
+            else
+            {
+                subject = this;
+            }
+
+            foreach (var observer in this.observers)
+            {
+                // pass in the current object
+                observer.Update(subject);
+            }
         }
 
         // Methods we might need for each zombie, most likely not many

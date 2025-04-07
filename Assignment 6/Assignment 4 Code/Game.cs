@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _487Assignment4.GEM_GOM;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace Assignment4_487
     public class Game
     {
         ZombieFactory factory = new ZombieFactory();
+        GameObjectManager manager = new GameObjectManager();
+        GameEventManager gameEventManager;
 
         public Game()
         {
-            
+            this.gameEventManager = new GameEventManager(this.manager);
         }
 
         public void TestGame()
@@ -112,14 +115,14 @@ namespace Assignment4_487
             int roundCount = 0;
             Console.Write($"Round {roundCount}: ");
             this.PrintZombies(zombies);
-            while (zombies.Count > 0)
+            while (this.manager?.zombies?.Count > 0)
             {
                 roundCount++;
                // Console.WriteLine("=== No Damage Applied ===");
                // this.PrintZombies(zombies);
                // Console.WriteLine("=== Took Damage ===");
                 this.ChoosePlant(zombies);
-                this.RemoveZombie(zombies);
+                this.manager.RemoveDeadZombies();
                 Console.Write($"Round {roundCount}: ");
                 this.PrintZombies(zombies);
             }
@@ -135,27 +138,35 @@ namespace Assignment4_487
                 Console.WriteLine("=====================");
                 Console.WriteLine("Which Kind?");
                 Console.Write(" 1. Regular \n 2. Cone \n 3. Screen \n 4. Bucket\n 5. Done\n");
+                IZombieComponent? zombie = null;
                 zombieType = Console.ReadLine();
+                
                 switch(zombieType)
                 {
                     case "1":
-                        zombies.Add(this.factory.CreateZombie("RegularZombie"));
+                        zombie = this.factory.CreateZombie("RegularZombie");
                         Console.WriteLine("Regular Zombie Created");
                         break;
                     case "2":
-                        zombies.Add(this.factory.CreateZombie("ConeZombie"));
+                        zombie = this.factory.CreateZombie("ConeZombie");
                         Console.WriteLine("Cone Zombie Created");
                         break;
                     case "3":
-                        zombies.Add(this.factory.CreateZombie("ScreenZombie"));
+                        zombie = this.factory.CreateZombie("ScreenZombie");
                         Console.WriteLine("Screen Zombie Created");
                         break;
                     case "4":
-                        zombies.Add(this.factory.CreateZombie("BucketZombie"));
+                        zombie = this.factory.CreateZombie("BucketZombie");
                         Console.WriteLine("Bucket Zombie Created");
                         break;
                 }
+                if (zombie != null)
+                {
+                    this.manager.AddZombie(zombie);
+                }
             }
+
+            
 
             Console.WriteLine("All Created Zombies: ");
             this.PrintZombies(zombies);
@@ -175,17 +186,18 @@ namespace Assignment4_487
                     //string? damageNumber = Console.ReadLine();
 
                     //int damage = int.Parse(damageNumber);
-                    zombies[0].TakeDamage(25);
+                    this.gameEventManager.SimulateCollisionDetection(1);
                     break;
                 case "2":
                     //Console.WriteLine($"Enter in a Damage value, Default is 40");
                     //string? damageNumber1 = Console.ReadLine();
 
                     //int damage1 = int.Parse(damageNumber1);
-                    zombies[0].TakeDamage(40);
+                    this.gameEventManager.SimulateCollisionDetection(2);
+
                     break;
                 case "3":
-                    zombies[0].MagnetForce();
+                    this.gameEventManager.SimulateCollisionDetection(3);
                     break;
                 default:
                     Console.WriteLine("Invalid Type skipping round....");
@@ -196,7 +208,7 @@ namespace Assignment4_487
         public void PrintZombies(List<IZombieComponent> zombies)
         {
             Console.Write("[");
-            foreach (IZombieComponent zombie in zombies)
+            foreach (IZombieComponent zombie in this.manager.zombies)
             {
                 zombie.RepresentZombie();
             }

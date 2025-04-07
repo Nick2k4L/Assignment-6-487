@@ -19,7 +19,9 @@ namespace _487Assignment4.Decorator_Pattern
         public IZombieComponent accessory { get; set; }
 
 
-        public override int GetTotalHealth => this.zombie.GetTotalHealth + this.AccessoryHealth; 
+        public override int GetTotalHealth => this.zombie.GetTotalHealth + this.AccessoryHealth;
+
+        public override bool IsAlive {  get; set; }
 
         public BucketDecorator(IZombieComponent zombieAccessory) : base(zombieAccessory)
         {
