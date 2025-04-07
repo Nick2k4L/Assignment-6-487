@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace _487Assignment4.GEM_GOM
 {
+    // Concrete Observer / Listener
     public class GameObjectManager : IObserver
     {
         /// <summary>

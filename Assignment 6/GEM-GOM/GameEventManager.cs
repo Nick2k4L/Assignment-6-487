@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace _487Assignment4.GEM_GOM
 {
+    // Sender
     public class GameEventManager
     {
         private GameObjectManager gameObjectManager;

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assignment4_487
 {
+    // Concrete Subject
     public class Zombie : IZombieComponent
     {
         public string ZombieType { get; } = "Regular"; // What type of accessory will the Zombie Have

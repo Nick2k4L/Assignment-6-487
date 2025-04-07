@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Assignment4_487
 {
     // THIS IS OUR CONCRETE SUBJECT
-    public interface IZombieComponent : ISubject // Interface for our composite pattern
+    public interface IZombieComponent : ISubject 
     {
         int GetTotalHealth {  get; } // gets total health
 
